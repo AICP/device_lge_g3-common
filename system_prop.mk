@@ -80,6 +80,3 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # USB
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.isUsbOtgEnabled=true
-
-#AICP Device Maintainers
-ro.aicp.maintainer=semdoc (doc HD), eboye
