@@ -44,6 +44,9 @@ BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x0008000 --ramdisk_offset 0x2000000
+ifeq ($(filter d852, $(TARGET_DEVICE)),)
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-linux-androideabi-
+endif
 TARGET_KERNEL_SOURCE := kernel/lge/g3
 
 # Audio
@@ -82,7 +85,6 @@ MAX_EGL_CACHE_SIZE := 2048*1024
 
 HAVE_ADRENO_SOURCE:= false
 OVERRIDE_RS_DRIVER:= libRSDriver_adreno.so
-TARGET_USE_COMPAT_GRALLOC_PERFORM := true
 
 # Fonts
 EXTENDED_FONT_FOOTPRINT := true
@@ -101,6 +103,9 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 
 # Power
 TARGET_POWERHAL_VARIANT := qcom
+
+# RIL
+BOARD_RIL_CLASS += ../../../device/lge/g3-common/ril
 
 # Qualcomm support
 BOARD_USES_QCOM_HARDWARE := true

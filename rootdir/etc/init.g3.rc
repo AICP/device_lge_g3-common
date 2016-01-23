@@ -12,7 +12,7 @@ on early-init
     write /sys/block/mmcblk1/bdi/read_ahead_kb 512
 
 on init
-    export LD_SHIM_LIBS /system/vendor/lib/libqomx_jpegenc.so|libboringssl-compat.so:/system/vendor/lib/libOpenCL.so|libboringssl-compat.so:/system/lib/libril.so|liblge.so
+    export LD_SHIM_LIBS /system/lib/libril.so|liblge.so
 
     mkdir /persist 0771 system system
 
@@ -70,6 +70,8 @@ on post-fs-data
     mkdir /tombstones/dsps 0771 system system
     mkdir /data/logger 0775 system system
 
+    mkdir /data/misc/camera 0770 camera camera
+
     mkdir /persist-lg/multimedia 0770 media divxdrm
     chown media divxdrm /persist-lg/multimedia
     chmod 0770 /persist-lg/multimedia
@@ -111,6 +113,8 @@ on early-boot
     write /sys/module/lowmemorykiller/parameters/lmk_fast_run 0
 
 on boot
+    mkdir /dev/socket/netmgr 0750 radio radio
+
     # BCM
     chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/type
     chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
@@ -575,12 +579,10 @@ service sensors /system/bin/sensors.qcom
     group root
     disabled
 
-# OSS thermal management
-service thermanager /system/bin/thermanager /system/etc/thermanager.xml
-    seclabel u:r:thermanager:s0
-    class late_start
-    user root
-    group root
+service thermal-engine /system/bin/thermal-engine
+   class main
+   user root
+   group root
 
 service time_daemon /system/bin/time_daemon
    class late_start
@@ -722,8 +724,8 @@ on property:service.bootanim.exit=1
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay "20000 1400000:40000 1700000:20000"
     write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 90
-    write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 1497600
-    write /sys/devices/system/cpu/cpufreq/interactive/io_is_busy 0
+    write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 1190400
+    write /sys/devices/system/cpu/cpufreq/interactive/io_is_busy 1
     write /sys/devices/system/cpu/cpufreq/interactive/target_loads "85 1500000:90 1800000:70"
     write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 40000
     write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 30000
@@ -772,12 +774,16 @@ on property:service.bootanim.exit=1
     chmod 664 /sys/devices/system/cpu/cpu2/online
     chmod 664 /sys/devices/system/cpu/cpu3/online
 
+    write /sys/module/cpu_boost/parameters/boost_ms "20"
     write /sys/module/cpu_boost/parameters/sync_threshold "1728000"
     write /sys/module/cpu_boost/parameters/input_boost_freq "1497600"
     write /sys/module/cpu_boost/parameters/input_boost_ms "40"
 
+    write /dev/cpuctl/cpu.notify_on_migrate "1"
+
+    setprop ro.qualcomm.perf.cores_online 2
+
     start mpdecision
 
-on property:init.svc.bootanim=running
     # Disable LG screen sharpening
     write /sys/devices/virtual/graphics/fb0/sharpening 0
