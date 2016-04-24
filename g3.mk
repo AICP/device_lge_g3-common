@@ -101,6 +101,10 @@ PRODUCT_PACKAGES += \
     memtrack.msm8974 \
     liboverlay
 
+# Doze mode
+PRODUCT_PACKAGES += \
+    OneplusDoze
+
 # IPv6 tethering
 PRODUCT_PACKAGES += \
     ebtables \
