@@ -101,10 +101,6 @@ PRODUCT_PACKAGES += \
     memtrack.msm8974 \
     liboverlay
 
-# GPS
-PRODUCT_PACKAGES += \
-    gps.msm8974
-
 # IPv6 tethering
 PRODUCT_PACKAGES += \
     ebtables \
@@ -121,6 +117,13 @@ PRODUCT_PACKAGES += \
 # Lights
 PRODUCT_PACKAGES += \
     lights.msm8974
+
+# Location
+PRODUCT_PACKAGES += \
+    gps.msm8974
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/izat.conf:system/etc/izat.conf
 
 # Media
 PRODUCT_COPY_FILES += \
