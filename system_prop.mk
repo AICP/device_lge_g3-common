@@ -56,3 +56,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Storage
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sys.sdcardfs=true
+
+# Hardware Info
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.device.chipset=Qualcomm MSM8974AC Snapdragon 801 \
+    ro.device.gpu=Qualcomm Adreno 330 \
+    ro.device.rear_cam=13 MP \
+    ro.device.front_cam=2.1 MP \
+    ro.device.screen_res=1440x2560 (~538 ppi)
