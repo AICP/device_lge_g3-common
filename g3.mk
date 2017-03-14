@@ -101,6 +101,10 @@ PRODUCT_PACKAGES += \
     memtrack.msm8974 \
     liboverlay
 
+# FlipFlap
+PRODUCT_PACKAGES += \
+    FlipFlap
+
 # Doze mode
 PRODUCT_PACKAGES += \
     OneplusDoze
