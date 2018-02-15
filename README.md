@@ -1,6 +1,4 @@
-Copyright 2014 - The CyanogenMod Project
-
-Copyright 2017 - The LineageOS Project
+Copyright 2018 - The AICP Project
 
 Device configuration for LG G3.
 =====================================
