@@ -122,7 +122,7 @@ PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl
 
 # FlipFlap
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     FlipFlap
 
 # IPv6 tethering
