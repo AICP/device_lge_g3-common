@@ -24,9 +24,9 @@ VENDOR=lge
 MY_DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$MY_DIR" ]]; then MY_DIR="$PWD"; fi
 
-LINEAGE_ROOT="$MY_DIR"/../../..
+AICP_ROOT="$MY_DIR"/../../..
 
-HELPER="$LINEAGE_ROOT"/vendor/lineage/build/tools/extract_utils.sh
+HELPER="$AICP_ROOT"/vendor/aicp/build/tools/extract_utils.sh
 if [ ! -f "$HELPER" ]; then
     echo "Unable to find helper script at $HELPER"
     exit 1
@@ -50,22 +50,22 @@ else
 fi
 
 # Initialize the helper for common device
-setup_vendor "$DEVICE_COMMON" "$VENDOR" "$LINEAGE_ROOT" true
+setup_vendor "$DEVICE_COMMON" "$VENDOR" "$AICP_ROOT" true
 
 extract "$MY_DIR"/proprietary-files.txt "$SRC"
 
 # Initialize the helper for device
-setup_vendor "$DEVICE" "$VENDOR" "$LINEAGE_ROOT"
+setup_vendor "$DEVICE" "$VENDOR" "$AICP_ROOT"
 
 extract "$MY_DIR"/../$DEVICE/proprietary-files.txt "$SRC"
 
-LIBDSI_NETCTRL="$LINEAGE_ROOT"/vendor/"$VENDOR"/"$DEVICE"/proprietary/vendor/lib/libdsi_netctrl.so
+LIBDSI_NETCTRL="$AICP_ROOT"/vendor/"$VENDOR"/"$DEVICE"/proprietary/vendor/lib/libdsi_netctrl.so
 sed -i 's|/system/etc/data/dsi_config.xml|/vendor/etc/data/dsi_config.xml|g' "$LIBDSI_NETCTRL"
 
-NETMGRD="$LINEAGE_ROOT"/vendor/"$VENDOR"/"$DEVICE"/proprietary/vendor/bin/netmgrd
+NETMGRD="$AICP_ROOT"/vendor/"$VENDOR"/"$DEVICE"/proprietary/vendor/bin/netmgrd
 sed -i 's|/system/etc/data/netmgr_config.xml|/vendor/etc/data/netmgr_config.xml|g' "$NETMGRD"
 
-THERMAL_ENGINE="$LINEAGE_ROOT"/vendor/"$VENDOR"/"$DEVICE_COMMON"/proprietary/vendor/bin/thermal-engine
+THERMAL_ENGINE="$AICP_ROOT"/vendor/"$VENDOR"/"$DEVICE_COMMON"/proprietary/vendor/bin/thermal-engine
 sed -i 's|/system/etc|/vendor/etc|g' "$THERMAL_ENGINE"
 
 "$MY_DIR"/setup-makefiles.sh
