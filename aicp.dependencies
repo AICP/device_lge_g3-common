@@ -1,0 +1,17 @@
+[
+  {
+    "repository":  "semdoc/kernel_lge_g3",
+    "target_path": "kernel/lge/g3",
+    "branch":      "p9.0"
+  },
+  {
+    "repository":  "semdoc/proprietary_vendor_lge",
+    "target_path": "vendor/lge",
+    "branch":      "9.0"
+  },
+  {
+    "repository": "LineageOS/android_packages_resources_devicesettings",
+    "target_path": "packages/resources/devicesettings",
+    "branch":      "lineage-16.0"
+  }
+]
