@@ -139,5 +139,10 @@ TARGET_USE_SDCLANG := true
 include device/qcom/sepolicy-legacy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += device/lge/g3-common/sepolicy
 
+# We modify several neverallows, so let the build proceed
+ifneq ($(TARGET_BUILD_VARIANT),user)
+SELINUX_IGNORE_NEVERALLOWS := true
+endif
+
 # Time services
 BOARD_USES_QC_TIME_SERVICES := true
