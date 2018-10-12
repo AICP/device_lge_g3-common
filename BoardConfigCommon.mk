@@ -146,6 +146,3 @@ TARGET_USE_SDCLANG := true
 ifneq ($(TARGET_BUILD_VARIANT),user)
 SELINUX_IGNORE_NEVERALLOWS := true
 endif
-
-# Time services
-BOARD_USES_QC_TIME_SERVICES := true
