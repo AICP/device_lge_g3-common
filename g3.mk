@@ -248,3 +248,7 @@ PRODUCT_PACKAGES += \
     libwpa_client \
     wpa_supplicant \
     wpa_supplicant.conf
+
+# Inherit custom memory configurations
+$(call inherit-product, vendor/aicp/config/phone-xxhdpi-2048-dalvik-heap.mk)
+$(call inherit-product, vendor/aicp/config/phone-xxhdpi-2048-hwui-memory.mk)
